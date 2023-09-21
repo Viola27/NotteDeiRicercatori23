@@ -30,7 +30,7 @@ for line in clusterFile.readlines():
         # xs = tutte le x dei punti del cluster
         # ys = tutte le y dei punti del cluster
         # tots = tutti i tot dei punti del cluster
-        notteRicercatori.drawTraceAndPlay(xs, ys, tots, clusterType, guessed)
+        guessed = notteRicercatori.drawTraceAndPlay(xs, ys, tots, clusterType, guessed)
         if guessed[0]:
             print("Indovinato!")
             punteggio += 1
@@ -39,34 +39,7 @@ for line in clusterFile.readlines():
             errors += 1
     if punteggio == 10:
         notteRicercatori.won()
+        exit()
     if errors == 3:
         notteRicercatori.lost()
-
-
-
-
-#     # Inizia un nuovo cluster
-#     if line.startswith("# Cluster"):
-#         # Salva il cluster "vecchio"
-#         if len(clusterLines) > minClusterLen:
-#             saveCluster(totMatrix, clusterLines, clusterFile, numcluster)
-#         # Azzera la lista
-#         clusterLines = []
-#         numcluster += 1
-#         # Riparte
-#         continue
-
-#     line = line.split()
-
-#     # Riga di header
-#     if line[0] == "X":
-#         continue
-
-#     # Aggiunge una lista con: X, Y, ToT
-#     clusterLines.append([int(line[1]), int(line[2]), float(line[4])])
-
-# # Salva l'ultimo cluster
-# saveCluster(totMatrix, clusterLines, clusterFile, numcluster)
-
-# clusterFile.close()
-# f.close()
+        exit()

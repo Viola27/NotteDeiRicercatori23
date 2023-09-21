@@ -7,10 +7,14 @@ btnW = 0.08
 btnH = 0.06
 
 def won():
-    None
+    photo = np.genfromtxt("haiVinto.txt")
+    plt.imshow(photo)
+    plt.show()
 
 def lost():
-    None
+    photo = np.genfromtxt("haiPerso.txt")
+    plt.imshow(photo)
+    plt.show()
     
 def checkSolution(clusterType, guess, guessed):
     def clickedButton(event):
@@ -70,4 +74,4 @@ def drawTraceAndPlay(X, Y, tot, clusterType, guessed):
     exit.on_clicked(exitFunct())
 
     plt.show()
-#    return guessed
+    return guessed
