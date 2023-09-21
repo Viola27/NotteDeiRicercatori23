@@ -32,10 +32,8 @@ for line in clusterFile.readlines():
         # tots = tutti i tot dei punti del cluster
         guessed = notteRicercatori.drawTraceAndPlay(xs, ys, tots, clusterType, guessed)
         if guessed[0]:
-            print("Indovinato!")
             punteggio += 1
         else:
-            print("Errore")
             errors += 1
     if punteggio == 10:
         notteRicercatori.won()

@@ -2,9 +2,12 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Button
 import numpy as np
 
-btnBottom = 0.02
-btnW = 0.08
-btnH = 0.06
+btnLeft = 0.02
+btnRight = 0.72
+btnBottom = 0.12
+btnTop = 0.52
+btnW = 0.25
+btnH = 0.35
 
 def won():
     photo = np.genfromtxt("haiVinto.txt")
@@ -19,7 +22,6 @@ def lost():
 def checkSolution(clusterType, guess, guessed):
     def clickedButton(event):
         if clusterType == guess:
-            print("True")
             guessed[0] = True
         else:
             guessed[0] = False
@@ -34,8 +36,8 @@ def exitFunct():
 
 def drawTraceAndPlay(X, Y, tot, clusterType, guessed):
     guessed = np.array([False], dtype=bool)
-    clusterHeight = max(X) - min(X) + 20
-    clusterWidth = max(Y) - min(Y) + 20
+    clusterHeight = max(X) - min(X) + 10
+    clusterWidth = max(Y) - min(Y) + 10
 
     # Normalizza X e Y
     X = np.array(X) - min(X) + 5
@@ -43,7 +45,7 @@ def drawTraceAndPlay(X, Y, tot, clusterType, guessed):
 
     clusterMatrix = np.zeros(shape=(clusterHeight, clusterWidth))
     for (x, y, t) in zip(X, Y, tot):
-        clusterMatrix[x+4][y+4] += t
+        clusterMatrix[x][y] += t
 
     # plt.xticks(range(-2, max(X)+10))
     # plt.yticks(range(-2, max(Y)+10))
@@ -53,23 +55,23 @@ def drawTraceAndPlay(X, Y, tot, clusterType, guessed):
 
     ax.imshow(clusterMatrix / max(tot) * 10, cmap=plt.cm.Reds)
 
-    btnElectron = plt.axes([0.05, btnBottom, btnW, btnH])
+    btnElectron = plt.axes([btnLeft, btnTop, btnW, btnH])
     elettrone = Button(btnElectron, 'Elettrone', color="orange")
     elettrone.on_clicked(checkSolution(clusterType, "Electron", guessed))
 
-    btnMuon = plt.axes([0.15, btnBottom, btnW, btnH])
+    btnMuon = plt.axes([btnLeft, btnBottom, btnW, btnH])
     muone = Button(btnMuon, 'Muone', color="magenta")
     muone.on_clicked(checkSolution(clusterType, "Muon", guessed))
 
-    btnPhoton = plt.axes([0.25, btnBottom, btnW, btnH])
+    btnPhoton = plt.axes([btnRight, btnTop, btnW, btnH])
     fotone = Button(btnPhoton, 'Fotone', color="yellow")
     fotone.on_clicked(checkSolution(clusterType, "Photon", guessed))
 
-    btnAlpha = plt.axes([0.35, btnBottom, btnW, btnH])
+    btnAlpha = plt.axes([btnRight, btnBottom, btnW, btnH])
     alpha = Button(btnAlpha, 'Alpha', color="blue")
     alpha.on_clicked(checkSolution(clusterType, "Alpha", guessed))
 
-    btnExit = plt.axes([0.65, btnBottom, btnW, btnH])
+    btnExit = plt.axes([btnRight, btnBottom - 0.09, 0.08, 0.08])
     exit = Button(btnExit, 'Exit', color="white")
     exit.on_clicked(exitFunct())
 
