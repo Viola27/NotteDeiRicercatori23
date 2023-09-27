@@ -20,16 +20,17 @@ def lost():
     plt.imshow(photo)
     plt.show()
     
-def checkSolution(corr, err, clusterType, guess, guessed):
+def checkSolution(fig, corr, err, clusterType, guess, guessed):
     def clickedButton(event):
         if clusterType == guess:
             corr.set_visible(True)
-            plt.show()
-            sleep(1)
+            fig.canvas.draw()
+            plt.pause(1.5)
             guessed[0] = True
         else:
             err.set_visible(True)
-            sleep(1)
+            fig.canvas.draw()
+            plt.pause(1.5)
             guessed[0] = False
         plt.close()
     return clickedButton
@@ -66,23 +67,28 @@ def drawTraceAndPlay(X, Y, tot, clusterType, guessed):
     err.set_visible(False)
 
     btnElectron = plt.axes([btnLeft, btnTop, btnW, btnH])
-    elettrone = Button(btnElectron, 'Elettrone', color="orange")
-    elettrone.on_clicked(checkSolution(corr, err, clusterType, "Electron", guessed))
+    elettrone = Button(btnElectron, 'Elettrone', color="springgreen")
+    elettrone.label.set_fontsize(25)
+    elettrone.on_clicked(checkSolution(fig, corr, err, clusterType, "Electron", guessed))
 
     btnMuon = plt.axes([btnLeft, btnBottom, btnW, btnH])
-    muone = Button(btnMuon, 'Muone', color="magenta")
-    muone.on_clicked(checkSolution(corr, err, clusterType, "Muon", guessed))
+    muone = Button(btnMuon, 'Muone', color="cornflowerblue")
+    muone.label.set_fontsize(25)
+    muone.on_clicked(checkSolution(fig, corr, err, clusterType, "Muon", guessed))
 
     btnPhoton = plt.axes([btnRight, btnTop, btnW, btnH])
-    fotone = Button(btnPhoton, 'Fotone', color="yellow")
-    fotone.on_clicked(checkSolution(corr, err, clusterType, "Photon", guessed))
+    fotone = Button(btnPhoton, 'Fotone', color="gold")
+    fotone.label.set_fontsize(25)
+    fotone.on_clicked(checkSolution(fig, corr, err, clusterType, "Photon", guessed))
 
     btnAlpha = plt.axes([btnRight, btnBottom, btnW, btnH])
-    alpha = Button(btnAlpha, 'Alpha', color="blue")
-    alpha.on_clicked(checkSolution(corr, err, clusterType, "Alpha", guessed))
+    alpha = Button(btnAlpha, 'Alpha', color="orangered")
+    alpha.label.set_fontsize(25)
+    alpha.on_clicked(checkSolution(fig, corr, err, clusterType, "Alpha", guessed))
 
     btnExit = plt.axes([btnRight, btnBottom - 0.09, 0.08, 0.08])
-    exit = Button(btnExit, 'Exit', color="white")
+    exit = Button(btnExit, 'Exit', color="grey")
+    exit.label.set_fontsize(20)
     exit.on_clicked(exitFunct())
 
     plt.show()

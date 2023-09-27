@@ -1,4 +1,5 @@
 import notteRicercatori
+import random
 
 
 # Main
@@ -6,8 +7,12 @@ punteggio = 0
 errors = 0
 clusterFile = open("clusterFile.dat", "r")
 clusterType = ""
+# Numero randomico tra 0 e 45 -> N * 2 (più o meno randomizza la lettura del file)
+randFirstLine = random.randint(0, 45) * 2
 
 for line in clusterFile.readlines():
+    for _ in range(randFirstLine):
+        continue
     xs = []
     ys = []
     tots = []
